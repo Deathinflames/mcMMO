@@ -104,7 +104,7 @@ public final class MobHealthbarUtils {
             case HEARTS:
                 fullDisplay = Math.min((int) (maxHealth / 2), 10);
                 color = ChatColor.DARK_RED;
-                symbol = "❤";
+                symbol = "\u2764";
                 break;
 
             case BAR:

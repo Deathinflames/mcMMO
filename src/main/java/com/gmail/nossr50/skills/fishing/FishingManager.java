@@ -543,17 +543,10 @@ public class FishingManager extends SkillManager {
         }
 
         if (Misc.getRandom().nextBoolean()) {
-            player.sendMessage(LocaleLoader.getString("Fishing.Ability.TH.Boom"));
-
-            TNTPrimed tnt = (TNTPrimed) player.getWorld().spawnEntity(fishingCatch.getLocation(), EntityType.PRIMED_TNT);
-            fishingCatch.setPassenger(tnt);
-
-            Vector velocity = fishingCatch.getVelocity();
-            double magnitude = velocity.length();
-            fishingCatch.setVelocity(velocity.multiply((magnitude + 1) / magnitude));
-
-            tnt.setMetadata(mcMMO.tntsafeMetadataKey, mcMMO.metadataValue);
-            tnt.setFuseTicks(3 * Misc.TICK_CONVERSION_FACTOR);
+            player.sendMessage(LocaleLoader.getString("Fishing.Ability.TH.Damage"));
+            final ThrownPotion thrownPotion = (ThrownPotion)player.getWorld().spawn(this.fishingCatch.getLocation(), (Class)ThrownPotion.class);
+            thrownPotion.setItem(new Potion(PotionType.INSTANT_DAMAGE).splash().toItemStack(1));
+            this.fishingCatch.setPassenger((Entity)thrownPotion);
         }
         else {
             player.sendMessage(LocaleLoader.getString("Fishing.Ability.TH.Poison"));
